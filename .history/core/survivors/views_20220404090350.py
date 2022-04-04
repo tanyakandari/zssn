@@ -30,20 +30,6 @@ class SurvivorsUpdateView(APIView):
         try:
             survivor = Survivor.objects.get(pk=id)
             survivor.update(params)
-            return Response({'data': SurvivorSerializer(survivor).data}, status=status.HTTP_200_OK)
+            return Response({'data': SurvivorSerializer(survivor).data},status=status.HTTP_200_OK)
         except Survivor.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
-
-class SurvivorsReportView(APIView):
-    def get(self, _):
-        percentage_of_infected_survivors = 0
-        percentage_of_non_infected_survivors = 0
-        total_survivors = Survivor.objects.count()
-        try:
-            percentage_of_non_infected_survivors = (Survivor.objects.filter(is_infected=False).count() / total_survivors) * 100
-            percentage_of_infected_survivors = (Survivor.objects.filter(is_infected=True).count() / total_survivors) * 100
-            return Response({'data': {'percentage_of_non_infected_survivors': percentage_of_non_infected_survivors,
-                                      'percentage_of_infected_survivors': percentage_of_infected_survivors}}, status=status.HTTP_200_OK)
-        except Exception:
-            return Response(data={'errors': [e.args]}, status=status.HTTP_400_BAD_REQUEST)
-

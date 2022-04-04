@@ -30,19 +30,4 @@ class Survivor(models.Model):
         with transaction.atomic():
             location = Location(**{k: v for k,v in location_data.items()})
             location.save()
-            survivor = Survivor(**{k: v for k,v in params.items()}, location_id=location.id)
-            survivor.save()
-            return survivor
-
-
-    def update(self, params):
-        for key, value in params.items():
-            if key in ['location', 'is_infected']:
-                if key == 'location':
-                    location = self.location
-                    for k, v in value.items():
-                        setattr(location, k, v)
-                    location.save()
-                else:
-                    setattr(self, key, value)
-        self.save()
+            survivor = Survivor(**{k: v for k,v in params.items()}, location_id=location.id).save()

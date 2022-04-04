@@ -20,4 +20,3 @@ urlpatterns = [
         SurvivorsReportView.as_view(),
         name='survivors-report'
     )
-]

@@ -11,13 +11,8 @@ urlpatterns = [
         name='survivors-actions'
     ),
     path(
-        '<int:id>/',
+        '<int: id>/',
         SurvivorsUpdateView.as_view(),
         name='survivors-details'
-    ),
-    path(
-        'reports/',
-        SurvivorsReportView.as_view(),
-        name='survivors-report'
     )
 ]

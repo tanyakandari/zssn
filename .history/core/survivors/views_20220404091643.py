@@ -44,6 +44,3 @@ class SurvivorsReportView(APIView):
             percentage_of_infected_survivors = (Survivor.objects.filter(is_infected=True).count() / total_survivors) * 100
             return Response({'data': {'percentage_of_non_infected_survivors': percentage_of_non_infected_survivors,
                                       'percentage_of_infected_survivors': percentage_of_infected_survivors}}, status=status.HTTP_200_OK)
-        except Exception:
-            return Response(data={'errors': [e.args]}, status=status.HTTP_400_BAD_REQUEST)
-

@@ -43,6 +43,5 @@ class Survivor(models.Model):
                     for k, v in value.items():
                         setattr(location, k, v)
                     location.save()
-                else:
-                    setattr(self, key, value)
+            setattr(self, key, value)
         self.save()

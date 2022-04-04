@@ -40,9 +40,8 @@ class Survivor(models.Model):
             if key in ['location', 'is_infected']:
                 if key == 'location':
                     location = self.location
-                    for k, v in value.items():
+                    for k, v in value:
                         setattr(location, k, v)
                     location.save()
-                else:
-                    setattr(self, key, value)
+            setattr(self, key, value)
         self.save()
